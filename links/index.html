@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-        <title>Xinxinの小窝</title>
+        <title>Links | Xinxinの小窝</title>
         <meta name="author" content="Her_one">
         <meta name="description" content="大家一起玩鸭(๑′ᴗ‵๑)Ｉ Lᵒᵛᵉᵧₒᵤ❤">
         <meta name="keywords" content="">
@@ -21,6 +21,7 @@
             <i data-fa-symbol="calendar-solid" class="fa-solid fa-calendar fa-fw"></i>
             <i data-fa-symbol="bookmark-solid" class="fa-solid fa-bookmark fa-fw"></i>
             <i data-fa-symbol="tags-solid" class="fa-solid fa-tags fa-fw"></i>
+            <i data-fa-symbol="tags-solid" class="fa-solid fa-tags"></i></i>
             <transition name="into">
                 <div v-show="show_page" style="display: -not-none">
                     <div id="menu_show">
@@ -57,7 +58,7 @@
         </a>
         
         <a href="/links">
-            <i class="fa-solid fa-links fa-fw"></i>
+            <i class="fa-solid fa-link fa-fw"></i>
             <span>&ensp;links</span>
         </a>
         
@@ -119,7 +120,7 @@
             <a href="/links">
                 <div class="item">
                     <div style="min-width: 20px; max-width: 50px; width: 10%">
-                        <i class="fa-solid fa-links fa-fw"></i>
+                        <i class="fa-solid fa-link fa-fw"></i>
                     </div>
                     <div style="min-width: 100px; max-width: 150%; width: 20%">links</div>
                 </div>
@@ -134,7 +135,7 @@
                         
 <div class="article">
     <div>
-        <h1> </h1>
+        <h1>Links </h1>
     </div>
     <div class="info">
         <span class="date">
@@ -147,7 +148,85 @@
         
     </div>
     <div class="content" v-pre>
-        <pre><code>
+        <pre><code>&lt;div class=&quot;post-body&quot;&gt;
+   &lt;div id=&quot;links&quot;&gt;
+      &lt;style&gt;
+         .links-content&#123;
+         margin-top:1rem;
+         &#125;
+         .link-navigation::after &#123;
+         content: &quot; &quot;;
+         display: block;
+         clear: both;
+         &#125;
+         .card &#123;
+         width: 45%;
+         font-size: 1rem;
+         padding: 10px 20px;
+         border-radius: 4px;
+         transition-duration: 0.15s;
+         margin-bottom: 1rem;
+         display:flex;
+         &#125;
+         .card:nth-child(odd) &#123;
+         float: left;
+         &#125;
+         .card:nth-child(even) &#123;
+         float: right;
+         &#125;
+         .card:hover &#123;
+         transform: scale(1.1);
+         box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
+         &#125;
+         .card a &#123;
+         border:none;
+         &#125;
+         .card .ava &#123;
+         width: 3rem!important;
+         height: 3rem!important;
+         margin:0!important;
+         margin-right: 1em!important;
+         border-radius:4px;
+         &#125;
+         .card .card-header &#123;
+         font-style: italic;
+         overflow: hidden;
+         width: 100%;
+         &#125;
+         .card .card-header a &#123;
+         font-style: normal;
+         color: #2bbc8a;
+         font-weight: bold;
+         text-decoration: none;
+         &#125;
+         .card .card-header a:hover &#123;
+         color: #d480aa;
+         text-decoration: none;
+         &#125;
+         .card .card-header .info &#123;
+         font-style:normal;
+         color:#a3a3a3;
+         font-size:14px;
+         min-width: 0;
+         overflow: hidden;
+         white-space: nowrap;
+         &#125;
+      &lt;/style&gt;
+      &lt;div class=&quot;links-content&quot;&gt;
+         &lt;div class=&quot;link-navigation&quot;&gt;
+            &lt;div class=&quot;card&quot;&gt;
+               &lt;img class=&quot;ava&quot; src=&quot;https://cdn.jsdelivr.net/gh/TheShineyue/cdn@1.3/images/%E4%BA%8C%E6%AC%A13.jpg&quot; /&gt;
+               &lt;div class=&quot;card-header&quot;&gt;
+                  &lt;div&gt;
+                     &lt;a href=&quot;https://theshineyue.github.io/&quot;&gt;名称&lt;/a&gt;
+                  &lt;/div&gt;
+                  &lt;div class=&quot;info&quot;&gt;描述&lt;/div&gt;
+               &lt;/div&gt;
+            &lt;/div&gt;
+         &lt;/div&gt;
+      &lt;/div&gt;
+   &lt;/div&gt;
+&lt;/div&gt;
 </code></pre>
 
     </div>
