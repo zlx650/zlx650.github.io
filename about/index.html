@@ -169,7 +169,22 @@
         <script src="https://cdn.staticfile.org/highlight.js/11.5.1/highlight.min.js"></script>
         <script src="/js/particlex.js"></script>
         <script src="/js/showimg.js"></script>
+        <div id="L2dCanvas"></div>
+<script src="/js/live2d.min.js"></script>
+<script src="/css/live2d.css"></script>
+<script>
+    var v = new Viewer({
+        width: 240,
+        height: 325,
+        right: "0",
+        bottom: "0",
+        basePath: "/model",
+        role: "<model-name>",
+        mobile: true,
+    });
+</script>
         
 
     </body>
 </html>
+
