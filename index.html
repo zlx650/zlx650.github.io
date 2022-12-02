@@ -156,6 +156,56 @@
             
 
 <div class="post">
+    <a href="/2022/12/02/如何把文章上传到博客/">
+        <h2>
+            如何把文章上传到博客
+        </h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/学习">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
+                学习
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2022/12/2
+        </span>
+    </div>
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            <h3 id="如何把文章上传到博客"><a href="#如何把文章上传到博客" class="headerlink" title="如何把文章上传到博客"></a>如何把文章上传到博客</h3><p>一段时间不写就老是忘记，记下来比较好。</p>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/教程" style="color: #ff7d73">
+                教程
+            </a>
+        </span>
+        
+    </div>
+    <a href="/2022/12/02/如何把文章上传到博客/" class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
     <a href="/2022/12/02/分类神经网络模型/">
         <h2>
             Pytorch深度学习之搭建一个简单的分类神经网络模型
@@ -181,658 +231,7 @@
     <div class="excerpt">
         <div class="content" v-pre>
             
-            <h2 id="分类神经网络模型"><a href="#分类神经网络模型" class="headerlink" title="分类神经网络模型"></a>分类神经网络模型</h2><h4 id="1-了解分类"><a href="#1-了解分类" class="headerlink" title="1.了解分类"></a>1.了解分类</h4><p>在搭建分类网络模型前，我们先来了解一下分类任务是什么。我们可以以分类和回归任务对照来了解分类任务。按照任务的种类，把任务分为回归任务和分类任务。而这两者的区别。</p>
-<blockquote>
-<p>输入变量与输出变量均为<strong>连续变量</strong>的预测问题是回归问题</p>
-<p>输出变量为有限个<strong>离散变量</strong>的预测问题成为分类问题</p>
-</blockquote>
-<p>就是说</p>
-<p><strong>回归任务：</strong> 连续、输出为一个定值      (预测明天的温度是多少度，就是在轴上是连续的)<br><strong>分类任务：</strong> 不连续、输出为一个概率向量       (预测明天天气是阴、晴还是雨，是离散的点)</p>
-<h4 id="2-了解神经网络"><a href="#2-了解神经网络" class="headerlink" title="2.了解神经网络"></a>2.了解神经网络</h4><p>神经网络又称为全连接或密集网络。一个层级中的每个单元都与下个层级中的每个单元相连。在全连接网络中，每个层级的输入必须是一维向量(可以作为一批样本堆叠为二维张量)。但是，我们的图像是28x28二维张量，因此我们需要将其转换为一维向量。考虑到大小问题，我们需要将形状为(64,1,28,28)的批次图像变形为(64,784)，784等于28x 28。这一步通常称为扁平化，我们将二维图像扁平化为一维向量。</p>
-<p>具体搭建可以看一看这篇博客</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="http://t.csdn.cn/vxQe3">全连接神经网络详解</a></p>
-</blockquote>
-<h4 id="3-分类神经网络实战"><a href="#3-分类神经网络实战" class="headerlink" title="3.分类神经网络实战"></a>3.分类神经网络实战</h4><p>在了解了分类任务是什么后，让我们借用我们在学的pytorch完成一个简单的神经网络分类任务吧！</p>
-<p>在开始前我们先对整个流程有个认识，深度学习整个过程由几个模块组成：数据预处理→数据封装-&gt;模型定义-&gt;损失函数，优化器定义-&gt;训练函数定义→开始训练。我这里顺序可能会有一些变化，但总的不会少。</p>
-<p>下面第一个实战举例的是一个Mnist手写体分类任务，简单介绍一下</p>
-<blockquote>
-<p>MNIST数据集(Mixed National Institute of Standards and Technology database)是美国国家标准与技术研究院收集整理的大型手写数字数据库,包含60,000个示例的训练集以及10,000个示例的测试集.图像是灰度的，28x28<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%83%8F%E7%B4%A0&spm=1001.2101.3001.7020">像素</a>，并且居中的，以减少预处理和加快运行</p>
-</blockquote>
-<p>如下图：![image-20221201131436800](C:\Users\Zheng ling x\AppData\Roaming\Typora\typora-user-images\image-20221201131436800.png)</p>
-<p>Mnist分类任务流程大致如下：</p>
-<p>一个手写字为“9”的图片在数据处理后进入神经网络，最后得到（1—9）的可能概率值，取最大的那个（0.87），而这个概率表示的是为9的概率，所以预测标签为9。</p>
-<p>![image-20221201132330009](C:\Users\Zheng ling x\AppData\Roaming\Typora\typora-user-images\image-20221201132330009.png)</p>
-<ul>
-<li>每一个训练数据（一张数字图片）是784（28x28）的数组，共有 50000 个训练数据</li>
-<li>展示图片要转换成 28*28的大小</li>
-</ul>
-<p>下面是神经网络处理流程：</p>
-<p>![image-20221201132806133](C:\Users\Zheng ling x\AppData\Roaming\Typora\typora-user-images\image-20221201132806133.png)</p>
-<ul>
-<li>红色为输入层，蓝色为隐层，绿色为输出层（输出每张图片属于 10 个数的可能性）</li>
-<li>输入时一个784 的 对应着 每一个图像的维度（红色）</li>
-<li>中间隐藏层 可以设置多层（上图中只画了一层 蓝色）</li>
-<li>最后由于是十分类的任务，将输出神经元个数 （绿色）</li>
-</ul>
-<p>这其中，三层网络就是做了三次wx+b操作。（这里中间层就是有两层）</p>
-<blockquote>
-<p>几何角度来说, wx+b 可以看做是一个超平面. 从代数的角度讲, 是一个”加权+偏置” 的操作, w为权重, b为偏置。</p>
-</blockquote>
-<p>每个输入数据有748个特征，我们可以规定每做一次wx+b，会获得所有输入数据的多次特征加权。假如我们想要先得到128个特征，然后得到256个特征，最后完成10分类。为了完成这个任务，w1要选取784×128大小的矩阵，b1要选取128×1的矩阵；w2要选取128×256大小的矩阵，b2要选取256×1的矩阵；w3要选取256×10大小的矩阵，b3要选取10×1的矩阵。学习的过程就是不断地更新w和b的过程，学习完成之后，计算机会保存每次学习中产生的分类效果最好的所有w和b阵。</p>
-<p>如果说你还不是很懂上面wx+b的操作，你可以理解为就是输入是一个个1×784的矩阵，经过一层变化提取成了128个特征，最后得到10个输出的结果（每个数字对应的结果），然后经过softmax函数变为每个结果数字的概率。</p>
-<blockquote>
-<p>softmax函数，又称归一化指数函数，把输入映射为0-1之间的实数，并且归一化保证和为1。</p>
-<p>详细可以参考以下两篇博客结合理解：</p>
-<p><a target="_blank" rel="noopener" href="http://t.csdn.cn/C4EXT">一分钟理解softmax函数（超简单）</a></p>
-<p><a target="_blank" rel="noopener" href="http://t.csdn.cn/1qmwB">入门级都能看懂的softmax详解</a></p>
-</blockquote>
-<p>简单了解整个流程后，我们就开始代码实战吧！</p>
-<h5 id="2-1-下载Mnist数据集"><a href="#2-1-下载Mnist数据集" class="headerlink" title="2.1 下载Mnist数据集"></a>2.1 下载Mnist数据集</h5><p>开始一个模型前，我们当然要先找到我们的数据集并且对它有些了解啦。</p>
-<p>新建一个py文件，命名为read_date，</p>
-<pre><code class="python">import torch
-from pathlib import Path   #引入路径处理库pathlib引入数据路径
-import requests
-import pickle
-import gzip  #导入gzip库将下载的数据解压
-
-#第一步下载数据
-DATA_PATH = Path(&quot;data&quot;)
-PATH = DATA_PATH / &quot;mnist&quot;  #创建一个data/mnist的路径
-PATH.mkdir(parents=True, exist_ok=True)
-#在这个给定的路径上创建一个新目录。
-#两个参数的意思：parents：如果父目录不存在，是否创建父目录。
-#exist_ok：只有在目录不存在时创建目录，目录已存在时不会抛出异常。
-
-URL = &quot;http://deeplearning.net/data/mnist/&quot;  #mnist的官方下载地址
-FILENAME = &quot;mnist.pkl.gz&quot;
-# 如果数据不存在，从网络下载
-
-if not (PATH / FILENAME).exists():
-        content = requests.get(URL + FILENAME).content
-        (PATH / FILENAME).open(&quot;wb&quot;).write(content)
-
-# 第二步，读数据，将分为 训练集（(x_train, y_train)） 、验证集 （ (x_valid, y_valid））两部分
-with gzip.open((PATH / FILENAME).as_posix(), &quot;rb&quot;) as f:  #as_posix()确保路径分隔符为Unix样式‘/’
-#     (x_train, y_train)训练集的样本数据和对应的标签, (x_valid, y_valid)验证集的样本数据和对应标签
-        ((x_train, y_train), (x_valid, y_valid), _) = pickle.load(f, encoding=&quot;latin-1&quot;)
-#“latin-1”单字节编码，向下兼容ASCII
-</code></pre>
-<p>因为这个官网可能老师没反应，所以运行时下载不了，可以自行下载minist数据集，然后把数据集放到这个工程下的data文件夹下的mnist文件夹，如下图：</p>
-<p>![image-20221201171722533](C:\Users\Zheng ling x\AppData\Roaming\Typora\typora-user-images\image-20221201171722533.png)</p>
-<p>放入后再次运行就好啦！</p>
-<h5 id="2-2查看图片信息"><a href="#2-2查看图片信息" class="headerlink" title="2.2查看图片信息"></a>2.2查看图片信息</h5><p>接下来我们查看我们获得的数据，可以在read_date.py文件下继续编写</p>
-<pre><code class="python">from matplotlib import pyplot
-import numpy as np
-
-print(x_train.shape)   #打印训练集的大小
-pyplot.imshow(x_train[0].reshape((28, 28)), cmap=&quot;gray&quot;)
- # 将训练集的 784个像素点重排列成28*28的图像 打印出来（注意这里没有赋值，不会影响到原数据本身）
-    
-#如果上面那行运行后无反应可以再末尾加上下面这行代码,可以随意更改x_train[]的下标多查看数据
-pyplot.show()
-</code></pre>
-<p>此外，还可以查看一些其他数据</p>
-<pre><code class="python">print(x_train.shape)  # (50000, 784)
-print(y_train.shape)  # (50000,)
-print(x_valid.shape)  # (10000, 784)
-print(y_valid.shape)  # (10000,)
-print(type(x_train))  # &lt;class &#39;numpy.ndarray&#39;&gt;
-#而这里的输出我们也能看出，我的minist数据集是50,000个示例的训练集以及10,000个示例的标签
-</code></pre>
-<pre><code class="python">print(type(x_train))
-print(x_train)
-print(y_train)
-</code></pre>
-<p>![image-20221201180844693](C:\Users\Zheng ling x\AppData\Roaming\Typora\typora-user-images\image-20221201180844693.png)</p>
-<h5 id="2-3数据转换"><a href="#2-3数据转换" class="headerlink" title="2.3数据转换"></a>2.3数据转换</h5><p>我们通过上面的代码也能看到我们的训练集的类型是“numpy.ndarray”，所以在创建模型前，我们需要把xb和yb的格式转换一下，torch模块操作的对象是Tensor类型，这个类型和我们常见的ndarray（numpy库用于存储矩阵的类型）很像，也可以保存矩阵。但是ndarry类型是不能被torch模块解析的</p>
-<blockquote>
-<p>因为图像的数据类型为torch，其形状（shape）为：(C, H, W)。在opencv中图像的数据类型为ndarray其形状为：（H, W, C）</p>
-</blockquote>
-<p>我们采用map函数来进行转换</p>
-<pre><code class="python">import torch
-# ndarray格式 torch 用不了，原因就是上面
-# map函数是一个映射，可以直接将四个ndarray格式的矩阵映射为torch.tensor格式
-x_train, y_train, x_valid, y_valid = map(
-    torch.tensor, (x_train, y_train, x_valid, y_valid)
-)
-</code></pre>
-<p>运行完转换数据的代码后，我们先看看数据到底转换成功没有，现在可以打印出一些数据来看看。</p>
-<pre><code class="python">#代码还是在read_date.py文件下继续编写
-print(type(x_train))
-print(y_train.min())
-print(y_train.max())
-print(x_train)
-print(y_train)
-print(x_train.shape)
-print(y_train.shape)
-</code></pre>
-<p>输出结果如下：</p>
-<p>![image-20221201180530570](C:\Users\Zheng ling x\AppData\Roaming\Typora\typora-user-images\image-20221201180530570.png)</p>
-<p>对比之前的一个数据，可以看到数据确实是由ndarray转为tensor类型了。</p>
-<h5 id="2-4模型搭建"><a href="#2-4模型搭建" class="headerlink" title="2.4模型搭建"></a>2.4模型搭建</h5><p>这里是按照上面的有两个隐藏层来写的</p>
-<pre><code class="python">from torch import nn
-
-# 继承不能改
-class Mnist_NN(nn.Module):# 创建新类，继承nn.Module类
-#     构造函数（接下来你会用到哪一层，哪一些操作，每一层的设计要给出来），先定义好第一个 FC（全连接层），第二个 FC，输出层，dropout
-#dropout是指深度学习训练过程中,对于神经网络训练单元,暂时将按照一定的概率将其从网络中移除，可以避免过拟合
-    def __init__(self):
-        super().__init__()
-#       第一个隐层：输入 784 个像素点（第一行有 784 列），输出 128 个特征（输出 128 行）
-        self.hidden1 = nn.Linear(784, 128)
-#       第二个隐层：输入（第一个隐层的输出） 128 个像素点，输出 256 个特征
-        self.hidden2 = nn.Linear(128, 256)
-#       输出层
-        self.out  = nn.Linear(256, 10)
-#       按照 50%的比例来杀死特征点（可以自己定义）
-        self.dropout = nn.Dropout(0.5)
-    
-# torch 中的前向传播是需要自己做定义，反向传播是自动的，torch 反向传播一行代码给你实现
-# 前向传播
-    def forward(self, x):# x 是输入数据  64 *784    64 是batch大小
-#       第一步走h1，
-        x = F.relu(self.hidden1(x))# 64 *128 这里实现的时输入到隐藏层神经元数据的映射
-#       每一个 FC 层都要加上 dropout，除了最后一层输出层
-        x = self.dropout(x)
-#       h2 层
-        x = F.relu(self.hidden2(x))
-    # 把x变成中间的结果：64*256（64*128矩阵（第一隐层）乘784*128矩阵（w2）+128*1矩阵（b2））
-        x = self.dropout(x) # 和上面一样随机失活
-#       输出层  
-        x = self.out(x)
-        return x
-        
-# 首先定义好自己的网络结构，定义一个类，类当中构造函数要用啥，每一层要怎么去走，要自己去定义
-</code></pre>
-<p>对于上面的注释如果你还是不是很清楚为什么要这么些，那么我们来分解看看。</p>
-<pre><code class="python">class Mnist_NN(nn.Module):
-</code></pre>
-<p>先继承 nn.Module。与 super().__init__() 相结合，创建一个跟踪架构的类，并提供大量有用的方法和属性。注意，在为网络创建类时，必须继承 nn.Module。类可以随意命名。</p>
-<pre><code class="python">self.hidden1 = nn.Linear(784, 128)
-</code></pre>
-<p>这行创建一个线性转换模块x<strong>w</strong>+b ，其中有 784 个输入和 128 个输出，并赋值给 self.hidden。该模块会自动创建权重和偏差张量，供我们在 forward 方法中使用。创建网络 (net) 后，你可以使用 net.hidden.weight 和 net.hidden.bias 访问权重和偏差张量。</p>
-<pre><code class="python">self.dropout = nn.Dropout(0.5)
-</code></pre>
-<p>同时定义了一个dropout层，对于神经网络训练单元,暂时将按照一定的概率将其从网络中移除，可以避免过拟合（过拟合为训练结果趋势变于平缓，效率低下），这里是按照50%的几率丢失。</p>
-<pre><code class="python">def forward(self, x):
-</code></pre>
-<p>用 nn.Module 创建的 PyTorch 网络必须定义 forward 方法。它会接受一个张量 x 并将其传入你在 __init__ 方法中定义的运算</p>
-<pre><code class="python">x = F.relu(self.hidden1(x))
-x = self.dropout(x)
-x = F.relu(self.hidden2(x))
-x = self.dropout(x) 
-x = self.out(x)
-</code></pre>
-<p>我们将输入张量 x 传入重新赋值给 x 的每个运算。可以看出输入张量经过隐藏层，然后经过relu激活函数、dropout层、最终是输出层。.变量可以命名为任何名称，只要运算的输入和输出与你要构建的网络架构匹配即可。你在 __init__ 方法中的定义顺序不重要，但是需要在 forward 方法中正确地设定运算顺序。</p>
-<blockquote>
-<p>ReLU激活函数：</p>
-<p>线性整流函数指代数学中的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%96%9C%E5%9D%A1%E5%87%BD%E6%95%B0?fromModule=lemma_inlink">斜坡函数</a>，即$f(x)&#x3D;max(0,x)$</p>
-<p>而在神经网络中，线性整流作为神经元的激活函数，定义了该神经元在线性变换$w^Tx+b$</p>
-<p>之后的非线性输出结果。换言之，对于进入神经元的来自上一层神经网络的输入向量x，使用线性整流激活函数的神经元会输出$max(0,w^Tx+b)$</p>
-</blockquote>
-<p>模型搭建好了之后我们可以打印这个模型看看~</p>
-<pre><code class="python">net = Mnist_NN()
-print(net)
-</code></pre>
-<p>得到以下结果</p>
-<p><img src="/../../AppData/Roaming/Typora/typora-user-images/image-20221202115751398.png" alt="image-20221202115751398"></p>
-<p>可以看到第一个隐藏层的输入是784，输出特征是128，bias是true，即考虑偏置的情况。而dropout层，p为失活概率，inplace&#x3D;False(默认)表示原数组不变,对数据进行修改之后结果给新的数组，即在传入的数据上进行丢失。</p>
-<p>此外，可以通过 模型名字.named_parameters() 打印模型中的各种参数的数据<br>权重参数一开始一般都是模型随机生成的，没有什么实际意义，主要看的是这些参数的shape</p>
-<pre><code class="python">for name, parameter in net.named_parameters():
-    print(name, parameter,parameter.size())  
-</code></pre>
-<pre><code>#打印定义好名字里的权重和偏置项
-hidden1.weight Parameter containing:
-tensor([[ 0.0027, -0.0022, -0.0055,  ...,  0.0078,  0.0247, -0.0192],
-        [-0.0339,  0.0103, -0.0235,  ..., -0.0288,  0.0073, -0.0075],
-        [-0.0141,  0.0344, -0.0132,  ..., -0.0350, -0.0173, -0.0100],
-        ...,
-        [-0.0140, -0.0140, -0.0046,  ..., -0.0302,  0.0207,  0.0176],
-        [ 0.0277,  0.0124,  0.0134,  ...,  0.0243, -0.0225,  0.0184],
-        [-0.0352, -0.0264, -0.0142,  ..., -0.0274, -0.0233,  0.0344]],
-       requires_grad=True) torch.Size([128, 784])
-hidden1.bias Parameter containing:
-tensor([-0.0303,  0.0354, -0.0071, -0.0326,  0.0083,  0.0017,  0.0271, -0.0207,
-         0.0006, -0.0005, -0.0244, -0.0217,  0.0076,  0.0036, -0.0102, -0.0161,
-         0.0224, -0.0001, -0.0256,  0.0262, -0.0013, -0.0171, -0.0255, -0.0231,
-        -0.0011,  0.0229,  0.0299,  0.0049, -0.0269, -0.0087,  0.0192,  0.0214,
-         0.0084,  0.0232, -0.0336,  0.0121, -0.0287, -0.0161,  0.0142, -0.0163,
-         0.0042, -0.0223, -0.0209,  0.0139,  0.0055, -0.0014, -0.0134, -0.0255,
-        -0.0156,  0.0112, -0.0053,  0.0022, -0.0040,  0.0332,  0.0074, -0.0077,
-         0.0041, -0.0030,  0.0138, -0.0055,  0.0051, -0.0166, -0.0040,  0.0324,
-         0.0140,  0.0332,  0.0106, -0.0162,  0.0050, -0.0134,  0.0027,  0.0112,
-         0.0310,  0.0148,  0.0066,  0.0279, -0.0043, -0.0204,  0.0131, -0.0342,
-        -0.0054, -0.0349, -0.0257,  0.0331, -0.0247, -0.0331,  0.0172,  0.0300,
-        -0.0175,  0.0040, -0.0032,  0.0227, -0.0065, -0.0025, -0.0022,  0.0122,
-         0.0034, -0.0241, -0.0214, -0.0145, -0.0102,  0.0138,  0.0086,  0.0248,
-        -0.0140,  0.0282,  0.0252, -0.0339, -0.0234, -0.0246, -0.0269,  0.0053,
-         0.0266,  0.0254, -0.0047,  0.0352, -0.0131,  0.0165,  0.0135,  0.0213,
-        -0.0007,  0.0287,  0.0083,  0.0277, -0.0058,  0.0114,  0.0173,  0.0286],
-       requires_grad=True) torch.Size([128])
-hidden2.weight Parameter containing:
-tensor([[ 0.0190,  0.0427, -0.0525,  ...,  0.0861,  0.0784,  0.0786],
-        [ 0.0731,  0.0117, -0.0419,  ...,  0.0884, -0.0380,  0.0419],
-        [ 0.0587,  0.0165,  0.0493,  ...,  0.0686,  0.0342,  0.0571],
-        ...,
-        [ 0.0285, -0.0632, -0.0817,  ..., -0.0512,  0.0303,  0.0510],
-        [ 0.0593,  0.0759, -0.0745,  ...,  0.0186, -0.0313, -0.0340],
-        [ 0.0861,  0.0423, -0.0775,  ..., -0.0624, -0.0870,  0.0762]],
-       requires_grad=True) torch.Size([256, 128])
-hidden2.bias Parameter containing:
-tensor([ 7.4097e-02,  4.6629e-02, -8.2986e-02, -8.7751e-02, -5.3916e-02,
-         8.3867e-02, -1.1953e-02,  4.6035e-02, -8.8070e-02, -5.9632e-02,
-        -5.9429e-02, -6.3860e-02,  2.0935e-02, -1.1254e-02, -4.2464e-02,
-         8.5531e-02,  2.1079e-02,  6.8146e-02,  1.1565e-02,  5.6848e-02,
-         5.4840e-02,  4.5182e-02, -9.1649e-03,  5.0353e-02, -1.8015e-03,
-         2.6689e-02, -3.9965e-05,  6.2541e-02,  5.0568e-02, -6.2894e-02,
-        -7.0055e-02, -6.1587e-03, -2.4325e-02, -2.8096e-02,  7.2279e-02,
-        -3.6908e-02, -4.6925e-02, -2.6866e-02, -9.3702e-03,  8.0664e-02,
-        -7.9017e-02, -2.6864e-02, -4.7067e-02, -4.1329e-02, -1.9187e-03,
-         1.1442e-03,  1.3277e-02, -7.4248e-02,  6.0666e-02, -4.5894e-03,
-         6.0067e-02,  2.1469e-03,  2.1151e-02, -2.3043e-02, -7.9863e-02,
-         5.3872e-02, -7.7295e-02, -5.5546e-02, -7.7987e-02, -6.0477e-02,
-         1.6859e-02, -8.0695e-02, -6.9225e-02, -3.6852e-02, -2.2640e-02,
-         8.4381e-02, -1.8218e-02,  6.4908e-02, -6.6085e-02, -7.9948e-02,
-         6.0501e-02,  3.7358e-02,  1.4517e-02,  7.0273e-02,  8.2232e-03,
-         5.1968e-02,  7.8515e-02,  1.8398e-02,  3.4030e-02, -5.6494e-02,
-        -8.1864e-02, -8.1865e-02,  2.0650e-02,  1.6167e-02, -5.1653e-02,
-         7.1260e-02,  4.7902e-02,  8.0863e-02, -1.4657e-02, -8.5865e-02,
-        -1.4997e-04, -6.9599e-02,  7.7994e-02,  8.2619e-02,  2.2315e-02,
-         6.8657e-02,  7.0133e-04, -6.5818e-02,  1.8908e-02,  4.5533e-02,
-         2.3858e-02,  7.4326e-02, -2.1297e-03, -4.1390e-02,  4.8876e-02,
-        -7.0887e-02,  1.8182e-02,  3.1976e-02, -3.9109e-03,  2.6077e-02,
-        -3.1730e-02, -6.9517e-03,  3.3127e-02,  3.1148e-02, -3.0821e-02,
-         4.4704e-02, -6.6373e-02, -2.7082e-02, -1.6443e-02,  5.4906e-02,
-         3.4513e-02, -3.2924e-02, -3.8282e-02, -1.9016e-02,  1.5467e-02,
-         5.7929e-02, -4.9530e-02,  4.4339e-02,  4.5115e-02, -3.1716e-02,
-        -2.5413e-02, -4.4847e-02, -8.8314e-02,  7.3139e-02,  4.7832e-02,
-         2.7252e-02,  2.4936e-03,  4.3945e-02, -4.4456e-02, -7.7288e-02,
-        -1.7711e-02, -3.8928e-03, -5.8669e-02,  8.7521e-02, -2.6780e-02,
-        -8.3013e-03,  1.0957e-02,  2.1655e-02,  4.9454e-02,  7.7148e-02,
-         3.1703e-02, -7.9392e-02,  1.7584e-02, -4.2138e-02,  1.6427e-02,
-         2.8579e-02, -1.0372e-02, -1.3828e-02, -6.4288e-02, -8.7187e-02,
-        -4.2234e-02,  4.8877e-02,  7.0942e-02, -1.3219e-02, -1.5638e-02,
-        -9.5584e-03,  8.0041e-02, -4.9838e-02, -8.1013e-02, -6.5758e-02,
-         7.7578e-02, -9.7699e-05,  8.0111e-02,  4.1581e-02, -2.6693e-02,
-        -3.8695e-02,  7.1744e-02,  4.0339e-02, -4.8112e-02, -2.0423e-03,
-         7.0743e-02, -2.4841e-02, -7.7070e-02, -6.0135e-02,  6.2730e-03,
-        -8.1717e-03,  7.5931e-02,  5.1676e-02, -8.5321e-03,  3.7730e-02,
-        -4.1940e-02, -5.8630e-02, -8.0619e-02, -7.8588e-02, -6.0648e-02,
-         3.9069e-02,  1.0447e-02,  3.6389e-02, -7.6101e-02, -1.7114e-03,
-         3.1534e-02, -3.4809e-02,  8.2356e-02,  2.6041e-03, -7.5177e-02,
-        -4.4776e-02, -4.5616e-02, -7.6679e-02,  9.8795e-03, -2.5713e-02,
-        -4.4352e-03, -7.5116e-02, -9.4276e-03,  8.2907e-02, -4.3754e-02,
-        -3.5088e-02,  1.7744e-02,  2.1664e-02,  7.8419e-02,  3.0914e-02,
-         2.7696e-02,  1.9163e-02,  3.5131e-02, -5.7099e-02, -7.7373e-02,
-        -6.5571e-02, -5.1810e-02, -6.9010e-02, -4.7727e-02, -4.4648e-02,
-        -5.4873e-02, -6.3451e-02, -7.6765e-02,  8.6244e-02, -2.4400e-02,
-        -5.4035e-02,  8.3185e-02,  1.7555e-02, -6.1780e-03,  1.6661e-02,
-         7.0687e-02, -2.0392e-02,  5.7005e-02, -8.2439e-03,  2.0712e-02,
-        -3.7073e-02, -6.1921e-02, -8.1027e-02,  5.8938e-02, -2.0062e-02,
-         4.0341e-02,  3.2229e-02,  3.0032e-04, -6.5667e-03, -2.3128e-02,
-         8.2173e-02], requires_grad=True) torch.Size([256])
-out.weight Parameter containing:
-tensor([[-0.0047, -0.0247, -0.0413,  ...,  0.0112, -0.0565, -0.0316],
-        [ 0.0510, -0.0357, -0.0531,  ..., -0.0390, -0.0450, -0.0257],
-        [ 0.0191, -0.0547,  0.0220,  ..., -0.0303,  0.0594,  0.0536],
-        ...,
-        [-0.0308, -0.0433, -0.0449,  ..., -0.0396, -0.0078, -0.0320],
-        [-0.0591,  0.0056,  0.0559,  ...,  0.0261, -0.0481,  0.0044],
-        [-0.0491,  0.0129, -0.0108,  ..., -0.0198, -0.0005, -0.0503]],
-       requires_grad=True) torch.Size([10, 256])
-out.bias Parameter containing:
-tensor([ 0.0487, -0.0531,  0.0104, -0.0362,  0.0187, -0.0099,  0.0591,  0.0596,
-        -0.0577, -0.0195], requires_grad=True) torch.Size([10])
-</code></pre>
-<h5 id="2-5数据封装"><a href="#2-5数据封装" class="headerlink" title="2.5数据封装"></a>2.5数据封装</h5><p>接下来我们要对我们的训练集和测试机分别做一个封装，方便后续的训练，训练集每次取64个，测试集每次取128个。</p>
-<p>这里将会用torch中的 Dataset 和 DataLoader 对于输入数据的处理整理并读取，这两个函数非常重要，前者作用一般将数据和标签对应好， 后者主要指定数据的batchsize 还有是否打乱等，这两个函数都需要大家花费很多时间去理解和掌握。</p>
-<p>这里的封装我们可以这样简单理解</p>
-<blockquote>
-<p>把“练习题”（灰度图像）和对应的“答案”（图像代表的数字）全部封装到一起，然后再拆分成64个（一个batch）一组的形式做成一套“试卷”，做过几套试卷（一个epoch）之后，机器就有了一定的识别能力了，这个时候我们就可以对这个学习结果进行测试，测试卷和答案也是用相同的办法封装出来的，并且测试题用到的题型不变，只是题量有所变化（可以取128个图像数据为一组测试题），计算机答题完成后会生成测试卷的分数，根据测试卷的分数就可以判断学习的效果了。这就是计算机学习和检验的全过程。封装用到的模块是TensorDataset和DataLoader</p>
-</blockquote>
-<pre><code class="python">from torch.utils.data import TensorDataset
-from torch.utils.data import DataLoader
-# 训练集
-train_ds = TensorDataset(x_train, y_train) # 把x_train, y_train封装成TensorDataset格式，相当于整理所有题目和答案
-# 测试集
-valid_ds = TensorDataset(x_valid, y_valid)
-
-def get_data(train_ds, valid_ds, bs): # 继续封装
-    train_dl = DataLoader(train_ds, batch_size=bs, shuffle=True) 
- #train_ds转换成DataLoader格式
- # 把完整的训练集数据（50000个手写数字图像）打包成bs（64）个一组，全部打包之后交给GPU
- # shuffle=True为打乱数据顺序，训练集需要打乱顺序提升学习效果
- # 64道题一张卷
- # 测试集不需要打乱顺序
-    valid_dl = DataLoader(valid_ds, batch_size=bs *2) # 128道题一张卷
-    return train_dl,valid_dl
-</code></pre>
-<h5 id="2-6损失函数，优化器定义"><a href="#2-6损失函数，优化器定义" class="headerlink" title="2.6损失函数，优化器定义"></a>2.6损失函数，优化器定义</h5><p>优化和计算损失是模型中非常重要的两个部分。所谓优化，就是提供w和b的更新方向。每次学习中，每层w和b的第一次初始化都是随机的，但如果w和b的更新方向也是随机的，那么可想而知学习效果必定是很差的。但是有了优化器提供更新方向，w和b的每次更新就都会比上一次效果更好；计算损失则是一套评分系统，因为每一轮完整的学习下来都需要进行一轮测试，计算机做了测试题后需要对测试结果好坏进行评判，因此就需要一套评分系统。从名字上可以看出，损失值越大，学习效果就越糟糕</p>
-<p>接下来就是训练方法的定义，而在写具体的函数类之前我们需要先设置一些参数</p>
-<h6 id="2-6-1设置损失函数和全连接层"><a href="#2-6-1设置损失函数和全连接层" class="headerlink" title="2.6.1设置损失函数和全连接层"></a>2.6.1设置损失函数和全连接层</h6><pre><code class="python">import torch.nn.functional as F
-
-# 计算损失
-loss_func = F.cross_entropy# 用loss_func的时候要传入（pre,y）预测值和标签
-
-# 全连接层
-def model(xb):
-    return xb.mm(weights) + bias
-</code></pre>
-<h6 id="2-6-2设置参数"><a href="#2-6-2设置参数" class="headerlink" title="2.6.2设置参数"></a>2.6.2设置参数</h6><pre><code class="python"># batchsize：一次性训练的样本个数
-bs = 64
-# xw + b,w哪里来，可以自己做初始化，权重参数随机初始化，
-# x 的规格。64*784（每个样本 784 个特征）
-xb = x_train[0:bs]  # a mini-batch from x
-yb = y_train[0:bs]
-# 随机初始化权重参数 w：784*10 ，需要梯度
-weights = torch.randn([784, 10], dtype = torch.float,  requires_grad = True)
-#torch.randn（）用来生成随机数字的tensor，这些随机数字满足标准正态分布（0~1)
-bs = 64
-# 偏执可以是随机数，可以常数，对结果的影响是非常小的
-bias = torch.zeros(10, requires_grad=True)
-#torch.zeros()，返回一个形状为为size,类型为torch.dtype（可不设置），里面的每一个值都是0的tensor
-# model(xb) 预测值, yb标签
-print(loss_func(model(xb), yb))
-</code></pre>
-<p>损失值的计算函数，作用是</p>
-<p>1.计算loss</p>
-<p>2.更新w，b</p>
-<pre><code class="python">def loss_batch(model, loss_func, xb, yb, opt=None):
-    loss = loss_func(model(xb), yb) # model(xb)：把输入放入模型之中得到预测值
-                                    # yb：真实值
-#优化器
-    if opt is not None: # 配合优化模式进行更新和计算
-        loss.backward() # 反向传播，计算梯度
-        opt.step() # 对w和b进行更新，沿着梯度方向更新学习率（lr）个大小
-        opt.zero_grad() # 清空之前的梯度。因为torch默认会对梯队进行累加，即上一次的结果会影响到下一次的迭代方向。
-                        # 如果不做清空将会影响每次迭代的独立性
-
-    return loss.item(), len(xb) # 返回loss值及训练的样本数量，样本数量用以计算平均损失
-</code></pre>
-<p>设置 SGD 优化器</p>
-<blockquote>
-<p>度下降法是神经网络中更新参数常用的方法，根据损失进行反向传播（大致为求偏导过程），进行权重及偏移量的更新。</p>
-<p>引入batch概念，将数据分批进行梯度下降，提高了拟合的真实性。</p>
-<p>SGD为随机梯度下降法，该算法旨在优化神经网络中更新权重。即在样本容量中随机取n个样本进行梯度下降，这样的好处在于避免了批梯度下降法中出现平滑点导致参数无法进行进一步优化的问题，如下图（转载）。</p>
-</blockquote>
-<pre><code class="python"># 优化器
-from torch import optim
-
-def get_model():
-    model = Mnist_NN()
-#     多返回一个优化器
-# 先用 SGD 梯度下降（更新那一些参数，model.parameters()所有参数都更新,model.parameters()保存的是Weights和Bais参数的值）
-# lr：学习率，开始时尽可能小一些，迭代次数尽可能大一些
-# SGD：梯度下降，lr：学习率，学习率设置过大可鞥会错过最优解情况
-    return model, optim.SGD(model.parameters(), lr=0.001)
-</code></pre>
-<h5 id="2-7训练函数定义"><a href="#2-7训练函数定义" class="headerlink" title="2.7训练函数定义"></a>2.7训练函数定义</h5><pre><code class="python">import numpy as np
-# 学习并检验
-# steps：数据集迭代次数
-# model：定义好的模型
-# loss_func：损失函数
-# opt：优化器
-def fit(steps, model, loss_func, opt, train_dl, valid_dl):
-#     每一次做一个遍历，steps 不是 batch，而是 epoch ，就是把整个数据集训练一遍
-# 例如 10000 个数据，batch = 100，那么 1 epoch = 100 iter，一次 epoch = 100 次迭代
-    for step in range(steps): # 遍历每个epoch（epoch由一个或多个Batch组成，
-                              # 因为系统会根据epoch的设定值定义epoch包含的batch量
-                              # 所以可以理解成它被动地定义一论学习计算机需要做的试卷数量）
-        # 一般在训练模型时加上model.train()，这样会正常使用Batch Normalization和 Dropout
-        model.train() # 训练，需要更新所有的权重和偏置
-                      # 通常每经历一次外循环，损失都会有所减小，epoch设置越大，最后的训练结果也越好
-       
-    
-    
-        # 训练每个batch（每个分组，64个数据）
-        for xb, yb in train_dl: # xb对应了某一层的输入，yb对应输入每个样本的标签
-            loss_batch(model, loss_func, xb, yb, opt) # 靠opt和loss_func来实现w和b的更新
-                                                      # 更新参数即可，不需要接收返回值
-        #验证模式，没有梯度，不更新 W，b，测试的时候一般选择model.eval()，这样就不会使用Batch Normalization和 Dropout
-        model.eval()
-        with torch.no_grad(): # 测试，不更新权重参数
-            losses, nums = zip(
- # 将当前的损失及编号单独存放，配对之后再解开，损失放在一起，样本数量放在一起
-                *[loss_batch(model, loss_func, xb, yb) for xb, yb in valid_dl]
-            )
-        val_loss = np.sum(np.multiply(losses, nums)) / np.sum(nums)
-# np.sum(np.multiply(losses, nums)) losses和nums对应相乘再相加(两个都是list类型），计算总损失
-# 总损失计算完成后在计算总的平均损失
-        print(&#39;当前step:&#39;+str(step+1), &#39;验证集损失：&#39;+str(val_loss))
-</code></pre>
-<p>该有的都有了，那我们开始训练吧！</p>
-<pre><code class="python">train_dl, valid_dl = get_data(train_ds, valid_ds, bs)
-model, opt = get_model()
-step=25 # 分成25个epoch
-fit(step, model, loss_func, opt, train_dl, valid_dl)
-</code></pre>
-<h5 id="2-8完整代码"><a href="#2-8完整代码" class="headerlink" title="2.8完整代码"></a>2.8完整代码</h5><pre><code class="python">import torch
-from pathlib import Path
-import requests
-import pickle
-import gzip
-import torch.nn.functional as F
-from torch.utils.data import TensorDataset, DataLoader
-from torch import optim
-import numpy as np
-
-DATA_PATH = Path(&quot;data&quot;)
-PATH = DATA_PATH / &quot;mnist&quot;
-PATH.mkdir(parents=True, exist_ok=True)
-URL = &quot;http://deeplearning.net/data/mnist/&quot;
-FILENAME = &quot;mnist.pkl.gz&quot;
-if not (PATH / FILENAME).exists():
-    content = requests.get(URL + FILENAME).content
-    (PATH / FILENAME).open(&quot;wb&quot;).write(content)
-
-with gzip.open((PATH / FILENAME).as_posix(), &quot;rb&quot;) as f:
-    ((x_train, y_train), (x_valid, y_valid), _) = pickle.load(f, encoding=&quot;latin-1&quot;)  # 拿出训练集和测试集
-
-from torch import nn
-
-bs = 64
-
-
-class Mnist_NN(nn.Module):
-    def __init__(self):
-        super().__init__()
-
-        self.hidden1 = nn.Linear(784, 128)
-        self.hidden2 = nn.Linear(128, 256)
-        self.out = nn.Linear(256, 10)
-        self.dropout = nn.Dropout(0.5)
-
-    def forward(self, x):
-        x = F.relu(self.hidden1(x))
-        x = self.dropout(x)
-        x = F.relu(self.hidden2(x))
-        x = self.dropout(x)
-        x = self.out(x)
-        return x
-
-
-x_train, y_train, x_valid, y_valid = map(torch.tensor, (x_train, y_train, x_valid, y_valid))
-n, c = x_train.shape
-
-train_ds = TensorDataset(x_train, y_train)
-
-valid_ds = TensorDataset(x_valid, y_valid)
-
-
-# 封装
-def get_data(train_ds, valid_ds, bs):
-    train_dl = DataLoader(train_ds, batch_size=bs, shuffle=True)
-    valid_dl = DataLoader(valid_ds, batch_size=bs * 2)  # 128道题一张卷
-    return train_dl, valid_dl
-
-
-# SGD优化器
-def get_model():
-    model = Mnist_NN()
-    return model, optim.SGD(model.parameters(), lr=0.001)
-
-
-# 计算损失
-loss_func = F.cross_entropy
-
-
-def loss_batch(model, loss_func, xb, yb, opt=None):
-    loss = loss_func(model(xb), yb)
-
-    if opt is not None:
-        loss.backward()
-        opt.step()
-        opt.zero_grad()
-
-    return loss.item(), len(xb)
-
-
-# 训练函数
-def fit(steps, model, loss_func, opt, train_dl, valid_dl):
-    for step in range(steps):
-        model.train()
-        for xb, yb in train_dl:
-            loss_batch(model, loss_func, xb, yb, opt)
-        model.eval()
-        with torch.no_grad():
-            losses, nums = zip(
-                *[loss_batch(model, loss_func, xb, yb) for xb, yb in valid_dl]
-            )
-        val_loss = np.sum(np.multiply(losses, nums)) / np.sum(nums)
-        print(&#39;当前step:&#39; + str(step + 1), &#39;验证集损失：&#39; + str(val_loss))
-
-
-# 开始训练
-train_dl, valid_dl = get_data(train_ds, valid_ds, bs)
-model, opt = get_model()
-step = 25
-fit(step, model, loss_func, opt, train_dl, valid_dl)
-</code></pre>
-<p>输出<img src="/../../AppData/Roaming/Typora/typora-user-images/image-20221202161458360.png" alt="image-20221202161458360"></p>
-<p>另外，也可以把训练函数（fit）改成计算准确率的</p>
-<pre><code class="python">correct = 0
-total = 0
-for xb,yb in valid_dl:
-    outputs = model(xb)
-#     torch.max(outputs.data,1), 1：指定沿着哪个维度去做计算，对每一个样本比他的概率值，沿着每一个样本概率值的维度 1,
-# 0 是比不同样本之间的
-    _,predicted = torch.max(outputs.data,1)
-#     _占位符：返回两个值，第一个没啥用，也不起名字，占个位置
-# 每个样本当中都有预测值，_返回的是最大的那个值是什么值
-# predicted：当前的最大值他所在的位置是什么，索引也对应了预测结果（0~9）,只要预测结果（索引）
-    total += yb.size(0)# batchsize = 64，计算完 64 个样本了，total 加上去
-#     yb：真实值，每个样本本身的标签，predicted：预测值
-# .item()：tensor 格式，跑验证集时，可能要画图，tensor 格式不行，得转换成 array 数据形式
-    correct += (predicted == yb).sum().item()
-    
-print(&#39;Accuracy of the network on the 10000 test images:%d %%&#39;%(100 * correct / total))
-</code></pre>
-<p>完整代码如下：</p>
-<pre><code class="python">import torch
-from pathlib import Path
-import requests
-import pickle
-import gzip
-import torch.nn.functional as F
-from torch.utils.data import TensorDataset,DataLoader
-from torch import optim
-import numpy as np
-
-DATA_PATH = Path(&quot;data&quot;)
-PATH = DATA_PATH / &quot;mnist&quot;
-PATH.mkdir(parents=True, exist_ok=True)
-URL = &quot;http://deeplearning.net/data/mnist/&quot;
-FILENAME = &quot;mnist.pkl.gz&quot;
-if not (PATH / FILENAME).exists():
-        content = requests.get(URL + FILENAME).content
-        (PATH / FILENAME).open(&quot;wb&quot;).write(content)
-
-
-with gzip.open((PATH / FILENAME).as_posix(), &quot;rb&quot;) as f:
-        ((x_train, y_train), (x_valid, y_valid), _) = pickle.load(f, encoding=&quot;latin-1&quot;) # 拿出训练集和测试集
-
-from torch import nn
-bs=64
-class Mnist_NN(nn.Module):
-    def __init__(self):
-        super().__init__() 
-        
-        self.hidden1 = nn.Linear(784, 128)
-        self.hidden2 = nn.Linear(128, 256)
-        self.out  = nn.Linear(256, 10)
-        self.dropout = nn.Dropout(0.5)
-        
-    def forward(self, x):
-        x = F.relu(self.hidden1(x))
-        x = self.dropout(x)
-        x = F.relu(self.hidden2(x)) 
-        x = self.dropout(x) 
-        x = self.out(x)
-        return x
-
-x_train, y_train, x_valid, y_valid = map(torch.tensor, (x_train, y_train, x_valid, y_valid))
-n, c = x_train.shape
-
-train_ds = TensorDataset(x_train, y_train)
-
-valid_ds = TensorDataset(x_valid, y_valid)
-
-#封装
-def get_data(train_ds, valid_ds, bs):
-    train_dl = DataLoader(train_ds, batch_size=bs, shuffle=True) 
-    valid_dl = DataLoader(valid_ds, batch_size=bs *2) # 128道题一张卷
-    return train_dl,valid_dl
-# SGD优化器
-def get_model():
-    model = Mnist_NN()
-    return model, optim.SGD(model.parameters(), lr=0.001)
-                                                          
-# 计算损失
-loss_func = F.cross_entropy
-def loss_batch(model, loss_func, xb, yb, opt=None):
-    loss = loss_func(model(xb), yb)
-
-    if opt is not None:
-        loss.backward()
-        opt.step()
-        opt.zero_grad()
-
-    return loss.item(), len(xb)
-
-#训练函数
-def fit(steps, model, loss_func, opt, train_dl, valid_dl):
-    for step in range(steps):
-        for xb, yb in train_dl:
-            loss_batch(model, loss_func, xb, yb, opt)
-
-        model.eval()
-        with torch.no_grad():
-            pass
-
-        correct = 0
-        total = 0
-        for xb, yb in valid_dl:
-            outputs = model(xb)
-            _, predicted = torch.max(outputs.data, 1)
-            total += yb.size(0)
-            correct += (predicted == yb).sum().item()
-        print(&quot;第&quot; + str(step + 1) + &quot;次学习后预测的准确率为:&quot; + str(100 * correct / total) + &quot;%&quot;)
-
-#开始训练       
-train_dl, valid_dl = get_data(train_ds, valid_ds, bs)
-model, opt = get_model()
-step=25
-fit(step, model, loss_func, opt, train_dl, valid_dl)
-</code></pre>
-<p>得到下面结果</p>
-<p><img src="/../../AppData/Roaming/Typora/typora-user-images/image-20221202160425764.png" alt="image-20221202160425764"></p>
-<p>如果你看到了这里，那就说明你已经会跑一个完整的神经网络模型啦！不过这还是最简单的，继续努力哦~如果一样的代码跑不出来注意缩进问题哦~~</p>
-<p>完成的同学可以拿下面这个二分类的模型继续练手一下~</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33612665/article/details/115001524">基于pytorch的二分类网络模型的搭建</a></p>
-</blockquote>
-
+            <h2 id="分类神经网络模型"><a href="#分类神经网络模型" class="headerlink" title="分类神经网络模型"></a>分类神经网络模型</h2><p>在跟着老师搞深度学习，加油入门，希望可以帮助到一些人！</p>
             
         </div>
     </div>
@@ -845,7 +244,7 @@ fit(step, model, loss_func, opt, train_dl, valid_dl)
         
         <span class="tag">
             
-            <a href="/tags/教程" style="color: #ffa2c4">
+            <a href="/tags/教程" style="color: #ff7d73">
                 教程
             </a>
         </span>
@@ -895,7 +294,7 @@ fit(step, model, loss_func, opt, train_dl, valid_dl)
         
         <span class="tag">
             
-            <a href="/tags/笔记" style="color: #ffa2c4">
+            <a href="/tags/笔记" style="color: #00bcd4">
                 笔记
             </a>
         </span>
